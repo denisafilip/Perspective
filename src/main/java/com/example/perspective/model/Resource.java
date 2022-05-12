@@ -34,8 +34,8 @@ public class Resource {
 
     @NonNull
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "id_subject")
-    private Subject subject;
+    @JoinColumn(name = "id_topic")
+    private Topic topic;
 
     @NonNull
     @ManyToOne(cascade = CascadeType.MERGE)

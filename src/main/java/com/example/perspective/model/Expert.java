@@ -18,10 +18,10 @@ public class Expert extends Account {
 
     @NonNull
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "topic_expert",
+    @JoinTable(name = "expert_subject",
             joinColumns = @JoinColumn(name = "id_expert"),
-            inverseJoinColumns = @JoinColumn(name = "id_topic"))
-    private List<Topic> topics;
+            inverseJoinColumns = @JoinColumn(name = "id_subject"))
+    private List<Subject> subjects;
 
     @JsonIgnore
     @OneToMany(mappedBy = "expert", orphanRemoval = true)

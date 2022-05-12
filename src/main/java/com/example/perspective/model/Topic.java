@@ -26,14 +26,23 @@ public class Topic {
     private Integer idTopic;
 
     @NonNull
-    @Column(name = "name", unique = true, nullable = false, length = 100)
+    @Column(name = "name", length = 1000, nullable = false)
     private String name;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "topics")
-    private List<Expert> experts;
+    @NonNull
+    @Column(name = "description", length = 1000, nullable = false)
+    private String description;
+
+    @NonNull
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "id_subject")
+    private Subject subject;
 
     @JsonIgnore
     @OneToMany(mappedBy = "topic", orphanRemoval = true)
-    private List<Subject> subjects;
+    private List<Perspective> perspectives;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "topic", orphanRemoval = true)
+    private List<Resource> resources;
 }
