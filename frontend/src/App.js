@@ -8,6 +8,7 @@ import "./css/Home.css";
 import PreRegister from "./components/PreRegister";
 import AdminRegister from "./components/Admin/Register";
 import UserRegister from "./components/User/Register";
+import ExpertRegister from "./components/Expert/Register";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/preregister" element={<PreRegister/>}/>
           <Route path="/admin/register" element={<AdminRegister/>}/>
           <Route path="/user/register" element={<UserRegister/>}/>
+          <Route path="/expert/register" element={<ExpertRegister/>}/>
 
       </Routes>
       </div>

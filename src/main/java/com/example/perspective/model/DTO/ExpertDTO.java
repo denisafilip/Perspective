@@ -1,6 +1,5 @@
 package com.example.perspective.model.DTO;
 
-import com.example.perspective.model.Subject;
 import lombok.*;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.List;
 public class ExpertDTO extends AccountDTO {
 
     @NonNull
-    private List<Subject> subjects;
+    private List<SubjectDTO> subjects;
 
     @Builder(builderMethodName = "ExpertDTOBuilder")
     public ExpertDTO(@NonNull String username,
@@ -20,7 +19,7 @@ public class ExpertDTO extends AccountDTO {
                      @NonNull String lastName,
                      @NonNull String email,
                      @NonNull String password,
-                     List<Subject> subjects) {
+                     List<SubjectDTO> subjects) {
         super(username, firstName, lastName, email, password);
         this.subjects = subjects;
     }

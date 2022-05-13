@@ -33,7 +33,13 @@ public class UserMapper implements Mapper<User, UserDTO> {
 
     @Override
     public User convertFromDTO(UserDTO userDTO) {
-        return null;
+        return User.UserBuilder()
+                .username(userDTO.getUsername())
+                .firstName(userDTO.getFirstName())
+                .lastName(userDTO.getLastName())
+                .email(userDTO.getEmail())
+                .password(userDTO.getPassword())
+                .build();
     }
 
     @Override

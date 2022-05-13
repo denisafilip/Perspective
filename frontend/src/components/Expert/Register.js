@@ -4,15 +4,17 @@ import { useNavigate } from "react-router-dom";
 import "../../css/FormStyle.css";
 import axios from "axios";
 
-function AdminRegister() {
+function ExpertRegister() {
     const [userInfo, setUserInfo] = useState({
         firstName: "",
         lastName: "",
         email: "",
         password: "",
         confirmPassword: "",
-        username: ""
+        username: "",
+        subjects: []
     });
+    const [subjects, setSubjects] = useState(JSON.parse(localStorage.getItem("subjects")));
     
     const [error, setError] = useState("");
 
@@ -32,16 +34,29 @@ function AdminRegister() {
         const {name, value} = event.target
         setUserInfo(prevState => {
             return {
-              ...prevState,
-              [name]: value
+                ...prevState,
+                [name]: value
             };
         })
         console.log(userInfo);
     }
 
-    const registerCustomer = async(userInfo) => {
+    function handleSubjectAddition(event) {
+        let value = Array.from(
+            event.target.selectedOptions,
+            (option) => option.value
+        );
+        setUserInfo(prevState => {
+            return {
+                ...prevState,
+                deliveryZones: value
+            };
+        })
+    }
+
+    const registerExpert = async(userInfo) => {
         await axios
-          .post("http://localhost:8080/admin/register", userInfo)
+          .post("http://localhost:8080/expert/register", userInfo)
           .then((response) => {
               console.info(response);
               goToLogIn();
@@ -53,7 +68,7 @@ function AdminRegister() {
     }
 
     function handleSubmit(event) {
-        registerCustomer(userInfo);
+        registerExpert(userInfo);
         console.log(userInfo);
         event.preventDefault();
     }
@@ -91,6 +106,14 @@ function AdminRegister() {
                     <Form.Control name="confirmPassword" type="password" value={userInfo.confirmPassword} onChange={handleChange}/>
                 </Form.Group>
 
+                <div>
+                    <select multiple={true} value={userInfo.subjects} onChange={handleSubjectAddition}>
+                        {subjects.map(subject =>
+                            <option value={subject.name} key={subject.idZone}>{subject.name}</option>
+                        )}
+                    </select>
+                </div>
+
                 <br/>
 
                 <text className="error-message">
@@ -108,4 +131,4 @@ function AdminRegister() {
     );
 }
 
-export default AdminRegister;
+export default ExpertRegister;

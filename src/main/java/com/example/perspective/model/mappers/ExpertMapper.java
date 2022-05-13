@@ -3,6 +3,8 @@ package com.example.perspective.model.mappers;
 import com.example.perspective.model.DTO.ExpertDTO;
 import com.example.perspective.model.Expert;
 
+import java.util.stream.Collectors;
+
 public class ExpertMapper implements Mapper<Expert, ExpertDTO> {
 
     /**
@@ -41,7 +43,9 @@ public class ExpertMapper implements Mapper<Expert, ExpertDTO> {
                 .email(expert.getEmail())
                 .username(expert.getUsername())
                 .password(expert.getPassword())
-                .subjects(expert.getSubjects())
+                .subjects(expert.getSubjects().stream()
+                        .map(SubjectMapper.getInstance()::convertToDTO)
+                        .collect(Collectors.toList()))
                 .build();
     }
 }

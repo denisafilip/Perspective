@@ -36,7 +36,13 @@ public class Expert extends Account {
      * @param password of the expert
      */
     @Builder(builderMethodName = "ExpertBuilder")
-    public Expert(@NonNull String username, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password) {
+    public Expert(@NonNull String username,
+                  @NonNull String firstName,
+                  @NonNull String lastName,
+                  @NonNull String email,
+                  @NonNull String password,
+                  @NonNull List<Subject> subjects) {
         super(username, firstName, lastName, email, password);
+        this.subjects = subjects;
     }
 }

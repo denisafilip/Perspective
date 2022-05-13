@@ -1,69 +1,14 @@
-import React, { useState } from "react";
-import {Form, Button,} from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import "../../css/FormStyle.css";
-import axios from "axios";
+import {Button, Form} from "react-bootstrap";
+import React from "react";
 
-function UserRegister() {
-    const [userInfo, setUserInfo] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        username: ""
-    });
-    
-    const [error, setError] = useState("");
 
-    const navigate = useNavigate();
-
-    function goToLogIn() {
-        navigate("/login");
-    }
-
-    function validateForm() {
-        return userInfo.email.length > 0 && userInfo.password.length > 0 && 
-            userInfo.firstName.length > 0 && userInfo.lastName.length > 0 &&
-            userInfo.username.length > 0 && userInfo.confirmPassword === userInfo.password;
-    }
-
-    function handleChange(event) {
-        const {name, value} = event.target
-        setUserInfo(prevState => {
-            return {
-              ...prevState,
-              [name]: value
-            };
-        })
-        console.log(userInfo);
-    }
-
-    const registerUser = async(userInfo) => {
-        await axios
-          .post("http://localhost:8080/user/register", userInfo)
-          .then((response) => {
-              console.info(response);
-              goToLogIn();
-          })
-          .catch((error) => {
-            setError(error.response.data.message);
-            console.error("There was an error!", error.response.data.message)
-          });
-    }
-
-    function handleSubmit(event) {
-        registerUser(userInfo);
-        console.log(userInfo);
-        event.preventDefault();
-    }
-
+export default function BasicRegisterForm() {
     return (
         <div className="FormStyle">
             <Form onSubmit={handleSubmit}>
                 <Form.Group size="lg" controlId="formBasicFirstName" className="mb-3">
                     <Form.Label>First Name</Form.Label>
-                        <Form.Control autoFocus name="firstName" type="text" value={userInfo.firstName} onChange={handleChange} />
+                    <Form.Control autoFocus name="firstName" type="text" value={userInfo.firstName} onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group size="lg" controlId="formBasicLastName" className="mb-3">
@@ -105,7 +50,5 @@ function UserRegister() {
                 </Button>
             </Form>
         </div>
-    );
+    )
 }
-
-export default UserRegister;

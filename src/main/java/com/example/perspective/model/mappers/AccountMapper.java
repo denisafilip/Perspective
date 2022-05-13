@@ -34,6 +34,7 @@ public class AccountMapper implements Mapper<Account, AccountDTO> {
     @Override
     public Account convertFromDTO(AccountDTO accountDTO) {
         return Account.builder()
+                .username(accountDTO.getUsername())
                 .firstName(accountDTO.getFirstName())
                 .lastName(accountDTO.getLastName())
                 .email(accountDTO.getEmail())
@@ -44,6 +45,7 @@ public class AccountMapper implements Mapper<Account, AccountDTO> {
     @Override
     public AccountDTO convertToDTO(Account account) {
         return AccountDTO.builder()
+                .username(account.getUsername())
                 .firstName(account.getFirstName())
                 .lastName(account.getLastName())
                 .email(account.getEmail())

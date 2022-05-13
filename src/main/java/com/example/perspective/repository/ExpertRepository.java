@@ -9,4 +9,6 @@ public interface ExpertRepository extends JpaRepository<Expert, Integer> {
 
     Optional<Expert> findByEmail(String email);
 
+    Optional<Expert> findByEmailOrUsername(String email, String username);
+
 }
