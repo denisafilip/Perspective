@@ -28,34 +28,34 @@ public class Account {
      * The username of the user.
      */
     @NonNull
-    @Column(name = "username", unique = true, length = 100)
+    @Column(name = "username", unique = true, length = 100, nullable = false)
     private String username;
 
     /**
      * The first name of the user.
      */
     @NonNull
-    @Column(name = "first_name", length = 100)
+    @Column(name = "first_name", length = 100, nullable = false)
     private String firstName;
 
     /**
      * The last name of the user.
      */
     @NonNull
-    @Column(name = "last_name", length = 100)
+    @Column(name = "last_name", length = 100, nullable = false)
     private String lastName;
 
     /**
      * The email of the user.
      */
     @NonNull
-    @Column(name = "email", unique = true, length = 100)
+    @Column(name = "email", unique = true, length = 100, nullable = false)
     private String email;
 
     /**
      * The plain text password of the user, which is encrypted in the database table.
      */
     @NonNull
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 }
