@@ -58,6 +58,7 @@ public class SecurityConfiguration {
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                     .authorizeRequests()
                     .antMatchers("/").permitAll()
+                    .antMatchers("/admin/register").permitAll()
                     .anyRequest().authenticated();
             http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         }
@@ -80,6 +81,7 @@ public class SecurityConfiguration {
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                     .authorizeRequests()
                     .antMatchers("/").permitAll()
+                    .antMatchers("/admin/register").permitAll()
                     .anyRequest().authenticated();
             http.addFilterBefore(new AuthTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         }
@@ -102,6 +104,7 @@ public class SecurityConfiguration {
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                     .authorizeRequests()
                     .antMatchers("/").permitAll()
+                    .antMatchers("/admin/register").permitAll()
                     .anyRequest().authenticated();
             http.addFilterBefore(new AuthTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         }

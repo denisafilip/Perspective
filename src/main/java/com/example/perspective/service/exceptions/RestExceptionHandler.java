@@ -46,7 +46,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<ApiError> handleInvalidInputException(InvalidDataException exception, WebRequest webRequest) {
         String error = "Invalid input data exception";
 
-        ApiError apiError = new ApiError(HttpStatus.UNAUTHORIZED, exception.getLocalizedMessage(), error);
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, exception.getLocalizedMessage(), error);
 
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }
@@ -55,7 +55,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<ApiError> handleNoSuchAccountException(NoSuchAccountException exception, WebRequest webRequest) {
         String error = "No such account exists exception";
 
-        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, exception.getLocalizedMessage(), error);
+        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, exception.getLocalizedMessage(), error);
 
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }

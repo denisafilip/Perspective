@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import {Form, Button,} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import AuthService from "./AuthService";
-import "../css/FormStyle.css";
+import "../../css/FormStyle.css";
 import axios from "axios";
 
-function Register() {
+function UserRegister() {
     const [userInfo, setUserInfo] = useState({
         firstName: "",
         lastName: "",
@@ -30,14 +29,10 @@ function Register() {
     }
 
     function handleChange(event) {
-        // get name and value properties from event target
         const {name, value} = event.target
         setUserInfo(prevState => {
-            // update your 'list' property
             return {
-              // spread old values into this object so you don't lose any data
               ...prevState,
-              // update this field's value
               [name]: value
             };
         })
@@ -46,7 +41,7 @@ function Register() {
 
     const registerCustomer = async(userInfo) => {
         await axios
-          .post("http://localhost:8080/customer/register", userInfo)
+          .post("http://localhost:8080/user/register", userInfo)
           .then((response) => {
               console.info(response);
               goToLogIn();
@@ -113,4 +108,4 @@ function Register() {
     );
 }
 
-export default Register;
+export default UserRegister;
