@@ -7,7 +7,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper=true)
 public class ExpertDTO extends AccountDTO {

@@ -1,6 +1,5 @@
 .FormStyle {
-    margin: auto;
-    margin-top: 30px;
+    margin: 30px auto auto;
     padding: 10px;
     border: 1px solid #c9c9c9;
     border-radius: 5px;
@@ -10,8 +9,7 @@
 }
 
 .FormStyle select {
-    margin: auto;
-    margin-bottom: 10px;
+    margin: auto auto 10px;
     padding: 10px;
     border: 1px solid #c9c9c9;
     border-radius: 5px;
@@ -28,6 +26,11 @@
     width: 100%; 
     font-size: 15px;
     display: block;
+    background-color: #6F2F9B;
+}
+
+.formButton {
+    background-color: #6F2F9B;
 }
 
 .CardStyle {
@@ -62,8 +65,7 @@
 }
 
 .select-container {
-    margin: auto;
-    margin-bottom: 10px;
+    margin: auto auto 10px;
     padding: 10px;
     border: 1px solid #c9c9c9;
     border-radius: 5px;
@@ -96,6 +98,5 @@
 
 .error-message {
     color: red;
-    justify-content: 'center';
     display: flex;
 }

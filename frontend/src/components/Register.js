@@ -26,7 +26,7 @@ function Register() {
     function validateForm() {
         return userInfo.email.length > 0 && userInfo.password.length > 0 && 
             userInfo.firstName.length > 0 && userInfo.lastName.length > 0 &&
-            userInfo.username.length > 0 && userInfo.confirmPassword == userInfo.password;
+            userInfo.username.length > 0 && userInfo.confirmPassword === userInfo.password;
     }
 
     function handleChange(event) {

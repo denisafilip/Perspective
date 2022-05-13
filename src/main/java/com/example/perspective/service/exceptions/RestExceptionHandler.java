@@ -68,8 +68,4 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }
-
-
-    }
-
 }

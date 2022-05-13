@@ -24,11 +24,11 @@ function Login() {
         await AuthService.login(credentials).then(
             (user) => {
                 console.log(user)
-                if (user.role == "ROLE_ADMIN") {
+                if (user.role === "ROLE_ADMIN") {
                     navigate("/admin")
-                } else if (user.role == "ROLE_USER") {
+                } else if (user.role === "ROLE_USER") {
                     navigate("/customer")
-                } else if (user.role == "ROLE_EXPERT") {
+                } else if (user.role === "ROLE_EXPERT") {
                     navigate("/expert")
                 }
             }
@@ -74,10 +74,10 @@ function Login() {
                     {error}
                 </text>
 
-                <Button variant="primary" block size="lg" type="submit" disabled={!validateForm()}>
+                <Button className="formButton" block size="lg" type="submit" disabled={!validateForm()}>
                     Login
                 </Button>
-                <Button variant="primary" block size="lg" onClick={goToRegister}>
+                <Button className="formButton" block size="lg" onClick={goToRegister}>
                     Register
                 </Button>
             </Form>
