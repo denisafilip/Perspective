@@ -27,7 +27,7 @@ function Login() {
                 if (user.role === "ROLE_ADMIN") {
                     navigate("/admin")
                 } else if (user.role === "ROLE_USER") {
-                    navigate("/customer")
+                    navigate("/user")
                 } else if (user.role === "ROLE_EXPERT") {
                     navigate("/expert")
                 }

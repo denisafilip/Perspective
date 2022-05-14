@@ -1,6 +1,7 @@
 package com.example.perspective.service.account.user;
 
 import com.example.perspective.model.DTO.UserDTO;
+import com.example.perspective.model.Expert;
 import com.example.perspective.model.User;
 import com.example.perspective.model.mappers.UserMapper;
 import com.example.perspective.repository.UserRepository;
@@ -12,6 +13,7 @@ import com.example.perspective.service.validators.UserPasswordValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -92,7 +94,13 @@ public class UserServiceImpl implements UserService {
             throw new DuplicateEmailException("An user with that email already exists!");
         }
 
-        User u = UserMapper.getInstance().convertFromDTO(userDTO);
+        User u = User.UserBuilder()
+                .email(userDTO.getEmail())
+                .firstName(userDTO.getFirstName())
+                .lastName(userDTO.getLastName())
+                .username(userDTO.getUsername())
+                .password(BCrypt.hashpw(userDTO.getPassword(), BCrypt.gensalt(12)))
+                .build();
         User savedUser = userRepository.save(u);
         return UserMapper.getInstance().convertToDTO(savedUser);
     }
