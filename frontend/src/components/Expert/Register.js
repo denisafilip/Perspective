@@ -49,7 +49,7 @@ function ExpertRegister() {
         setUserInfo(prevState => {
             return {
                 ...prevState,
-                deliveryZones: value
+                subjects: value
             };
         })
     }
@@ -68,7 +68,7 @@ function ExpertRegister() {
     }
 
     function handleSubmit(event) {
-        registerExpert(userInfo);
+        registerExpert(userInfo).then(r => console.log(r));
         console.log(userInfo);
         event.preventDefault();
     }
@@ -108,8 +108,8 @@ function ExpertRegister() {
 
                 <div>
                     <select multiple={true} value={userInfo.subjects} onChange={handleSubjectAddition}>
-                        {subjects.map(subject =>
-                            <option value={subject.name} key={subject.idZone}>{subject.name}</option>
+                        {subjects?.map(subject =>
+                            <option value={subject.name} key={subject.name}>{subject.name}</option>
                         )}
                     </select>
                 </div>

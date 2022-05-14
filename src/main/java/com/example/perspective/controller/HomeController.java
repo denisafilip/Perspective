@@ -1,7 +1,7 @@
 package com.example.perspective.controller;
 
-import com.example.perspective.model.Subject;
-import com.example.perspective.service.subject.SubjectServiceImpl;
+import com.example.perspective.model.DTO.SubjectDTO;
+import com.example.perspective.service.discussion.SubjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class HomeController {
 
     @GetMapping("/getSubjects")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<List<Subject>> getSubjects() {
+    public ResponseEntity<List<SubjectDTO>> getSubjects() {
         return new ResponseEntity<>(subjectService.findAll(), HttpStatus.ACCEPTED);
     }
 

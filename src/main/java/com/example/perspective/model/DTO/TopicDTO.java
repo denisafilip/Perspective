@@ -1,6 +1,5 @@
 package com.example.perspective.model.DTO;
 
-import com.example.perspective.model.Subject;
 import lombok.*;
 
 @Getter
@@ -18,5 +17,5 @@ public class TopicDTO {
     private String description;
 
     @NonNull
-    private Subject subject;
+    private SubjectDTO subjectDTO;
 }

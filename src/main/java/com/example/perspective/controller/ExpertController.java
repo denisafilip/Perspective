@@ -45,8 +45,9 @@ public class ExpertController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<ExpertDTO> save(@Validated @RequestBody ExpertDTO expertDTO) throws InvalidDataException, DuplicateEmailException {
+    public ResponseEntity<ExpertDTO> save(@Validated @RequestBody(required = false) ExpertDTO expertDTO) throws InvalidDataException, DuplicateEmailException {
         logger.info("Save expertDTO to database");
+        System.out.println(expertDTO);
         return new ResponseEntity<>(expertUserService.register(expertDTO), HttpStatus.CREATED);
     }
 }

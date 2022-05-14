@@ -30,13 +30,17 @@ public class SubjectMapper implements Mapper<Subject, SubjectDTO> {
 
     @Override
     public Subject convertFromDTO(SubjectDTO subjectDTO) {
-        return null;
+        return Subject.builder()
+                .name(subjectDTO.getName())
+                .description(subjectDTO.getDescription())
+                .build();
     }
 
     @Override
     public SubjectDTO convertToDTO(Subject subject) {
         return SubjectDTO.builder()
                 .name(subject.getName())
+                .description(subject.getDescription())
                 .build();
     }
 }

@@ -9,32 +9,28 @@ import PreRegister from "./components/PreRegister";
 import AdminRegister from "./components/Admin/Register";
 import UserRegister from "./components/User/Register";
 import ExpertRegister from "./components/Expert/Register";
+import Admin from "./components/Admin";
+import User from "./components/User";
+import HomeNavBar from "./components/HomeNavBar";
+import Expert from "./components/Expert";
 
 
 function App() {
   return (
       <Router>
-      <div>
-          <Navbar className="color-nav">
-              <Container>
-                  <Navbar.Brand className="color-nav" style={{color: "white", fontWeight: "bold"}} href="/">Perspective</Navbar.Brand>
-                  <Nav className="me-auto">
-                      <Nav.Link style={{color: "white", fontWeight: "bold"}} href="/preregister">Register</Nav.Link>
-                      <Nav.Link style={{color: "white", fontWeight: "bold"}} href="/login">Log In</Nav.Link>
-                  </Nav>
-              </Container>
-          </Navbar>
-          <Outlet />
           <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/preregister" element={<PreRegister/>}/>
-          <Route path="/admin/register" element={<AdminRegister/>}/>
-          <Route path="/user/register" element={<UserRegister/>}/>
-          <Route path="/expert/register" element={<ExpertRegister/>}/>
-
-      </Routes>
-      </div>
+              <Route path="/" element={<HomeNavBar/>}>
+                  <Route path="/" element={<Home/>}/>
+                  <Route path="login" element={<Login/>}/>
+                  <Route path="preregister" element={<PreRegister/>}/>
+                  <Route path="admin/register" element={<AdminRegister/>}/>
+                  <Route path="user/register" element={<UserRegister/>}/>
+                  <Route path="expert/register" element={<ExpertRegister/>}/>
+              </Route>
+              <Route path="/admin/*" element={<Admin/>}/>
+              <Route path="/user/*" element={<User/>}/>
+              <Route path="/expert/*" element={<Expert/>}/>
+        </Routes>
       </Router>
   );
 }

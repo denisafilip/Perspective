@@ -3,6 +3,7 @@ package com.example.perspective.controller;
 import com.example.perspective.model.AccountRole;
 import com.example.perspective.model.DTO.*;
 import com.example.perspective.service.account.AccountServiceImpl;
+import com.example.perspective.service.account.exceptions.InvalidPasswordException;
 import com.example.perspective.service.security.JwtResponse;
 import com.example.perspective.service.security.JwtUtils;
 import org.slf4j.Logger;
@@ -33,7 +34,7 @@ public class AccountController {
      * @return response received after account log in
      */
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> authenticateUser(@RequestBody(required = false) LoginDTO loginDTO) {
+    public ResponseEntity<JwtResponse> authenticateUser(@RequestBody(required = false) LoginDTO loginDTO) throws InvalidPasswordException {
         String jwt = jwtUtils.generateJwtToken(loginDTO.getEmail());
 
         AccountDTO accountDTO = accountService.logIn(loginDTO);

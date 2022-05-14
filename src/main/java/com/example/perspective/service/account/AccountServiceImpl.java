@@ -13,11 +13,8 @@ import com.example.perspective.model.mappers.UserMapper;
 import com.example.perspective.repository.AdministratorRepository;
 import com.example.perspective.repository.ExpertRepository;
 import com.example.perspective.repository.UserRepository;
+import com.example.perspective.service.account.exceptions.InvalidPasswordException;
 import com.example.perspective.service.account.exceptions.NoSuchAccountException;
-import com.example.perspective.service.exceptions.InvalidDataException;
-import com.example.perspective.service.validators.NameValidator;
-import com.example.perspective.service.validators.UserEmailValidator;
-import com.example.perspective.service.validators.UserPasswordValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +64,7 @@ public class AccountServiceImpl implements AccountService {
      * {@inheritDoc}
      */
     @Override
-    public AccountDTO getAccountDTO(LoginDTO loginDTO) throws NoSuchAccountException {
+    public AccountDTO getAccountDTO(LoginDTO loginDTO) throws NoSuchAccountException, InvalidPasswordException {
         AccountDTO accountDTO = this.findByEmail(loginDTO.getEmail());
         if (accountDTO == null) {
             logger.warn("No account with email {} was found", loginDTO.getEmail());
@@ -78,14 +75,14 @@ public class AccountServiceImpl implements AccountService {
             return accountDTO;
         }
         logger.warn("The password for the email {} is incorrect!", loginDTO.getEmail());
-        throw new NoSuchAccountException("The password for this email is incorrect!");
+        throw new InvalidPasswordException("The password for this email is incorrect!");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public AccountDTO logIn(LoginDTO loginDTO) throws NoSuchAccountException {
+    public AccountDTO logIn(LoginDTO loginDTO) throws NoSuchAccountException, InvalidPasswordException {
         return this.getAccountDTO(loginDTO);
     }
 

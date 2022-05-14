@@ -1,8 +1,13 @@
 package com.example.perspective.controller;
 
 import com.example.perspective.model.DTO.AdministratorDTO;
+import com.example.perspective.model.DTO.SubjectDTO;
+import com.example.perspective.model.DTO.TopicDTO;
 import com.example.perspective.model.mappers.AdministratorMapper;
 import com.example.perspective.service.account.administrator.AdministratorServiceImpl;
+import com.example.perspective.service.discussion.SubjectServiceImpl;
+import com.example.perspective.service.discussion.topic.TopicServiceImpl;
+import com.example.perspective.service.exceptions.DuplicateNameException;
 import com.example.perspective.service.exceptions.InvalidDataException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +32,12 @@ public class AdministratorController {
     @Autowired
     private AdministratorServiceImpl administratorService;
 
+    @Autowired
+    private SubjectServiceImpl subjectService;
+
+    @Autowired
+    private TopicServiceImpl topicService;
+
     @GetMapping("/getAll")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public List<AdministratorDTO> getAdministrators() {
@@ -42,9 +53,21 @@ public class AdministratorController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AdministratorDTO> save(@Validated @RequestBody AdministratorDTO administratorDTO) throws InvalidDataException {
+    public ResponseEntity<AdministratorDTO> save(@Validated @RequestBody(required = false) AdministratorDTO administratorDTO) throws InvalidDataException {
         logger.info("Save administratorDTO to database");
         return new ResponseEntity<>(administratorService.register(administratorDTO), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/addSubject")
+    public ResponseEntity<SubjectDTO> addSubject(@Validated @RequestBody(required = false) SubjectDTO subjectDTO) throws InvalidDataException, DuplicateNameException {
+        logger.info("Add new discussion subject to database");
+        return new ResponseEntity<>(subjectService.save(subjectDTO), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/addTopic")
+    public ResponseEntity<TopicDTO> addTopic(@Validated @RequestBody(required = false) TopicDTO topicDTO) throws InvalidDataException, DuplicateNameException {
+        logger.info("Add new discussion topic to database");
+        return new ResponseEntity<>(topicService.save(topicDTO), HttpStatus.CREATED);
     }
 
 }

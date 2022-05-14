@@ -2,6 +2,7 @@ package com.example.perspective.service.account;
 
 import com.example.perspective.model.DTO.AccountDTO;
 import com.example.perspective.model.DTO.LoginDTO;
+import com.example.perspective.service.account.exceptions.InvalidPasswordException;
 
 /**
  * Service interface for user account operations.
@@ -20,12 +21,12 @@ public interface AccountService {
      * @param loginDTO containing the email and password of the account
      * @return the DTO of the retrieved account
      */
-    AccountDTO getAccountDTO(LoginDTO loginDTO);
+    AccountDTO getAccountDTO(LoginDTO loginDTO) throws InvalidPasswordException;
 
     /**
      * Logins an account, by trying to match the given credentials with those from the database
      * @param loginDTO containing the email and password of the account
      * @return the DTO of the logged in account
      */
-    AccountDTO logIn(LoginDTO loginDTO);
+    AccountDTO logIn(LoginDTO loginDTO) throws InvalidPasswordException;
 }

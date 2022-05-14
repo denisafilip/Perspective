@@ -8,7 +8,10 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 public class SubjectDTO {
     @NonNull
     private String name;
+
+    private String description;
 }

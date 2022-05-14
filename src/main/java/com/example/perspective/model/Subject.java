@@ -29,6 +29,10 @@ public class Subject {
     @Column(name = "name", unique = true, nullable = false, length = 100)
     private String name;
 
+    @NonNull
+    @Column(name = "description", unique = true, nullable = false, length = 1000)
+    private String description;
+
     @JsonIgnore
     @ManyToMany(mappedBy = "subjects")
     private List<Expert> experts;

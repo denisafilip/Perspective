@@ -1,6 +1,7 @@
 package com.example.perspective.service.exceptions;
 
 import com.example.perspective.service.account.exceptions.DuplicateEmailException;
+import com.example.perspective.service.account.exceptions.InvalidPasswordException;
 import com.example.perspective.service.account.exceptions.NoSuchAccountException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -65,6 +66,24 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         String error = "This email already exists";
 
         ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, exception.getLocalizedMessage(), error);
+
+        return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
+    }
+
+    @ExceptionHandler(DuplicateNameException.class)
+    protected ResponseEntity<ApiError> handleDuplicateNameException(DuplicateNameException exception, WebRequest webRequest) {
+        String error = "This name already exists";
+
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, exception.getLocalizedMessage(), error);
+
+        return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
+    }
+
+    @ExceptionHandler(InvalidPasswordException.class)
+    protected ResponseEntity<ApiError> handleInvalidPasswordException(InvalidPasswordException exception, WebRequest webRequest) {
+        String error = "The password for this account is incorrect!";
+
+        ApiError apiError = new ApiError(HttpStatus.NOT_ACCEPTABLE, exception.getLocalizedMessage(), error);
 
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }

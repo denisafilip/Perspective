@@ -30,7 +30,11 @@ public class TopicMapper implements Mapper<Topic, TopicDTO> {
 
     @Override
     public Topic convertFromDTO(TopicDTO topicDTO) {
-        return null;
+        return Topic.builder()
+                .name(topicDTO.getName())
+                .description(topicDTO.getDescription())
+                .subject(SubjectMapper.getInstance().convertFromDTO(topicDTO.getSubjectDTO()))
+                .build();
     }
 
     @Override
@@ -38,7 +42,7 @@ public class TopicMapper implements Mapper<Topic, TopicDTO> {
         return TopicDTO.builder()
                 .name(topic.getName())
                 .description(topic.getDescription())
-                .subject(topic.getSubject())
+                .subjectDTO(SubjectMapper.getInstance().convertToDTO(topic.getSubject()))
                 .build();
     }
 }

@@ -85,6 +85,7 @@ public class ExpertUserServiceImpl implements ExpertUserService {
     public ExpertDTO register(ExpertDTO expertDTO) throws InvalidDataException, DuplicateEmailException {
         logger.info("Register expert user {} {}, with email {}, to database", expertDTO.getFirstName(), expertDTO.getLastName(),
                 expertDTO.getEmail());
+        System.out.println(expertDTO);
         validateExpert(expertDTO.getUsername(),
                 expertDTO.getFirstName(),
                 expertDTO.getLastName(),
@@ -94,8 +95,8 @@ public class ExpertUserServiceImpl implements ExpertUserService {
         Optional<Expert> _expert = expertRepository.findByEmailOrUsername(expertDTO.getEmail(), expertDTO.getUsername());
 
         List<Subject> subjects = new ArrayList<>();
-        for (SubjectDTO zoneDTO : expertDTO.getSubjects()) {
-            Optional<Subject> subject = subjectRepository.findByName(zoneDTO.getName());
+        for (SubjectDTO subjectDTO : expertDTO.getSubjects()) {
+            Optional<Subject> subject = subjectRepository.findByName(subjectDTO.getName());
             subject.ifPresent(subjects::add);
         }
 
