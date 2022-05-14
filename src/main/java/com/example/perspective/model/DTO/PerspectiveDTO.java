@@ -11,6 +11,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 public class PerspectiveDTO {
 
     @NonNull
@@ -21,4 +22,6 @@ public class PerspectiveDTO {
 
     @NonNull
     private User user;
+
+    private String notes;
 }

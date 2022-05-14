@@ -38,9 +38,10 @@ export default function UserHome() {
                 <Container>
                     <Navbar.Brand style={{color: "white", fontWeight: "bold"}}  href="/user/">User</Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link style={{color: "white", fontWeight: "bold"}} href="/user/startConversation">Start Conversation</Nav.Link>
-                        <Nav.Link style={{color: "white", fontWeight: "bold"}}  href="/user/viewTopics">View Topics</Nav.Link>
-                        <Nav.Link style={{color: "white", fontWeight: "bold"}}  href="/" onClick={logOut}>Log Out</Nav.Link>
+                        <Nav.Link style={{color: "white"}} href="/user/startConversation">Start Conversation</Nav.Link>
+                        <Nav.Link style={{color: "white"}}  href="/user/viewTopics">View Topics</Nav.Link>
+                        <Nav.Link style={{color: "white"}}  href="/user/setPerspective">Set Perspectives</Nav.Link>
+                        <Nav.Link style={{color: "white"}}  href="/" onClick={logOut}>Log Out</Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>

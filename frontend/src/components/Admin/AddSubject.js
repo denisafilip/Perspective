@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Form, Button, Card} from "react-bootstrap";
+import {ProgressBar, Form, Button, Card} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../../css/FormStyle.css";
 import axios from "axios";
@@ -10,7 +10,9 @@ export default function AddSubject() {
         name: "",
         description: ""
     });
+    const [progress, setProgress] = useState(0);
     const [error, setError] = useState("");
+    const [subjects, setSubjects] = useState(JSON.parse(localStorage.getItem("subjects")));
 
     const navigate = useNavigate();
 
@@ -20,6 +22,11 @@ export default function AddSubject() {
 
     function handleChange(event) {
         const {name, value} = event.target
+        if (subjectInfo.name.length > 0 && subjectInfo.description.length === 0) {
+            setProgress(50);
+        } else if (validateForm()) {
+            setProgress(100);
+        }
         setSubjectInfo(prevState => {
             return {
                 ...prevState,
@@ -39,6 +46,7 @@ export default function AddSubject() {
                     description: ""
                 })
                 console.info(response);
+                localStorage.setItem('subjects', JSON.stringify([...subjects, response.data]));
                 navigate("/admin/addSubject");
             })
             .catch((error) => {
@@ -59,6 +67,9 @@ export default function AddSubject() {
             </Card>
 
             <br/>
+
+            <ProgressBar striped variant="success" now={progress} />
+
             <br/>
 
             <Form onSubmit={handleSubmit}>

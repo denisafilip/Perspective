@@ -50,3 +50,15 @@
     color: white;
     background-color: #6F2F9B;
 }
+
+.range-slider {
+    text-align: center;
+    display: block;
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+}

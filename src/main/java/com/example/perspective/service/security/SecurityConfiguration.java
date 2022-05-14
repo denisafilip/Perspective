@@ -63,6 +63,7 @@ public class SecurityConfiguration {
                     .antMatchers("/expert/register").permitAll()
                     .antMatchers("/login").permitAll()
                     .antMatchers("/getSubjects").permitAll()
+                    .antMatchers("/getTopics").permitAll()
                     .anyRequest().authenticated();
             http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         }
@@ -89,6 +90,7 @@ public class SecurityConfiguration {
                     .antMatchers("/user/register").permitAll()
                     .antMatchers("/expert/register").permitAll()
                     .antMatchers("/getSubjects").permitAll()
+                    .antMatchers("/getTopics").permitAll()
                     .antMatchers("/login").permitAll()
                     .anyRequest().authenticated();
             http.addFilterBefore(new AuthTokenFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -115,6 +117,7 @@ public class SecurityConfiguration {
                     .antMatchers("/admin/register").permitAll()
                     .antMatchers("/user/register").permitAll()
                     .antMatchers("/expert/register").permitAll()
+                    .antMatchers("/getTopics").permitAll()
                     .antMatchers("/login").permitAll()
                     .antMatchers("/getSubjects").permitAll()
                     .anyRequest().authenticated();

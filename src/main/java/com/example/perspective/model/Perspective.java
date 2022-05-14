@@ -37,4 +37,8 @@ public class Perspective {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_user")
     private User user;
+
+    @NonNull
+    @Column(name = "notes", length = 1000)
+    private String notes;
 }

@@ -1,4 +1,4 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import {useNavigate} from "react-router";
 import axios from "axios";
 import authHeader from "../AuthHeader";
@@ -7,6 +7,7 @@ import {Card, Form, Button} from "react-bootstrap";
 
 export default function AddTopic() {
     const [subjects, setSubjects] = useState(JSON.parse(localStorage.getItem("subjects")));
+    const [topics, setTopics] = useState(JSON.parse(localStorage.getItem("topics")));
     const [topicInfo, setTopicInfo] = useState({
         name: "",
         description: "",
@@ -56,7 +57,8 @@ export default function AddTopic() {
                     subjectDTO: subjects[0],
                     description: ""
                 })
-                console.info(response)
+                console.info(response);
+                localStorage.setItem('topics', JSON.stringify([...topics, response.data]));
                 navigate("/admin/addTopic");
             })
             .catch((error) => {

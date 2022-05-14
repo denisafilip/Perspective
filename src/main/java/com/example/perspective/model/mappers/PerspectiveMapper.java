@@ -39,6 +39,7 @@ public class PerspectiveMapper implements Mapper<Perspective, PerspectiveDTO> {
                 .belief(perspective.getBelief())
                 .topic(perspective.getTopic())
                 .user(perspective.getUser())
+                .notes(perspective.getNotes())
                 .build();
     }
 }
