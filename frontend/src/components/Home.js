@@ -3,9 +3,8 @@ import '../css/Home.css';
 import perspective from '../css/perspective-logo.png';
 import {Container, Image, Nav, Navbar} from 'react-bootstrap';
 import axios from "axios";
-import {Outlet} from "react-router-dom";
-import HomeNavBar from "./HomeNavBar";
- 
+
+
 export default function Home() {
 
     axios

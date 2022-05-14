@@ -1,8 +1,7 @@
 import './App.css';
-import {BrowserRouter as Router, Outlet, Route, Routes} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Home from "./components/Home";
 import Login from "./components/Login";
-import {Container, Nav, Navbar} from "react-bootstrap";
 import React from "react";
 import "./css/Home.css";
 import PreRegister from "./components/PreRegister";
