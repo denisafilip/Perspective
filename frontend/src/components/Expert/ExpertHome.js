@@ -38,8 +38,9 @@ export default function ExpertHome() {
                 <Container>
                     <Navbar.Brand style={{color: "white", fontWeight: "bold"}}  href="/expert/">Expert</Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link style={{color: "white", fontWeight: "bold"}} href="/expert/addResource">Add Resource</Nav.Link>
-                        <Nav.Link style={{color: "white", fontWeight: "bold"}} href="/" onClick={logOut}>Log Out</Nav.Link>
+                        <Nav.Link style={{color: "white"}} href="/expert/addResource">Add Resource</Nav.Link>
+                        <Nav.Link style={{color: "white"}} href="/" onClick={logOut}>Log Out</Nav.Link>
+                        <Nav.Link style={{color: "white"}}  href="/" onClick={logOut}>Log Out</Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>

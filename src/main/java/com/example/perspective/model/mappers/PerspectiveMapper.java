@@ -37,8 +37,8 @@ public class PerspectiveMapper implements Mapper<Perspective, PerspectiveDTO> {
     public PerspectiveDTO convertToDTO(Perspective perspective) {
         return PerspectiveDTO.builder()
                 .belief(perspective.getBelief())
-                .topic(perspective.getTopic())
-                .user(perspective.getUser())
+                .topicDTO(TopicMapper.getInstance().convertToDTO(perspective.getTopic()))
+                .userDTO(UserMapper.getInstance().convertToDTO(perspective.getUser()))
                 .notes(perspective.getNotes())
                 .build();
     }

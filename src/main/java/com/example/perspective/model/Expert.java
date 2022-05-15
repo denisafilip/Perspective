@@ -24,6 +24,7 @@ public class Expert extends Account {
     private List<Subject> subjects;
 
     @JsonIgnore
+    @ToString.Exclude
     @OneToMany(mappedBy = "expert", orphanRemoval = true)
     private List<Resource> resources;
 

@@ -39,10 +39,12 @@ public class Topic {
     private Subject subject;
 
     @JsonIgnore
+    @ToString.Exclude
     @OneToMany(mappedBy = "topic", orphanRemoval = true)
     private List<Perspective> perspectives;
 
     @JsonIgnore
+    @ToString.Exclude
     @OneToMany(mappedBy = "topic", orphanRemoval = true)
     private List<Resource> resources;
 }

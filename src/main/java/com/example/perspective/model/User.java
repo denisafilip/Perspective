@@ -18,6 +18,7 @@ import java.util.List;
 public class User extends Account {
 
     @JsonIgnore
+    @ToString.Exclude
     @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<Perspective> perspectives;
 

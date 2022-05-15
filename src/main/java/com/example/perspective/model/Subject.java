@@ -34,10 +34,12 @@ public class Subject {
     private String description;
 
     @JsonIgnore
+    @ToString.Exclude
     @ManyToMany(mappedBy = "subjects")
     private List<Expert> experts;
 
     @JsonIgnore
+    @ToString.Exclude
     @OneToMany(mappedBy = "subject", orphanRemoval = true)
     private List<Topic> topics;
 }

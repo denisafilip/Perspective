@@ -1,8 +1,6 @@
 package com.example.perspective.model.DTO;
 
 import com.example.perspective.model.Spectrum;
-import com.example.perspective.model.Topic;
-import com.example.perspective.model.User;
 import lombok.*;
 
 @Getter
@@ -18,10 +16,10 @@ public class PerspectiveDTO {
     private Spectrum belief;
 
     @NonNull
-    private Topic topic;
+    private TopicDTO topicDTO;
 
     @NonNull
-    private User user;
+    private UserDTO userDTO;
 
     private String notes;
 }

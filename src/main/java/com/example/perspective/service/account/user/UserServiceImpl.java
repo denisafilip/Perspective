@@ -1,11 +1,16 @@
 package com.example.perspective.service.account.user;
 
+import com.example.perspective.model.DTO.PerspectiveDTO;
 import com.example.perspective.model.DTO.UserDTO;
 import com.example.perspective.model.Expert;
 import com.example.perspective.model.User;
+import com.example.perspective.model.mappers.PerspectiveMapper;
+import com.example.perspective.model.mappers.SubjectMapper;
 import com.example.perspective.model.mappers.UserMapper;
+import com.example.perspective.repository.PerspectiveRepository;
 import com.example.perspective.repository.UserRepository;
 import com.example.perspective.service.account.exceptions.DuplicateEmailException;
+import com.example.perspective.service.account.exceptions.NoSuchAccountException;
 import com.example.perspective.service.exceptions.InvalidDataException;
 import com.example.perspective.service.validators.NameValidator;
 import com.example.perspective.service.validators.UserEmailValidator;
@@ -26,6 +31,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PerspectiveRepository perspectiveRepository;
 
     /**
      * Validates the details of a user
@@ -103,5 +111,18 @@ public class UserServiceImpl implements UserService {
                 .build();
         User savedUser = userRepository.save(u);
         return UserMapper.getInstance().convertToDTO(savedUser);
+    }
+
+    public List<PerspectiveDTO> getPerspectives(String email) {
+        User u = findByEmail(email);
+
+        if (u == null) {
+            logger.info("No user account with email {} was found!", email);
+            throw new NoSuchAccountException("No user account with email " + email + " was found!");
+        }
+
+        return perspectiveRepository.findAllByUser(u).stream()
+                .map(PerspectiveMapper.getInstance()::convertToDTO)
+                .collect(Collectors.toList());
     }
 }
