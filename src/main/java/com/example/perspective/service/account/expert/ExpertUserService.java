@@ -1,6 +1,7 @@
 package com.example.perspective.service.account.expert;
 
 import com.example.perspective.model.DTO.ExpertDTO;
+import com.example.perspective.model.DTO.SubjectDTO;
 import com.example.perspective.model.Expert;
 import com.example.perspective.service.account.exceptions.DuplicateEmailException;
 import com.example.perspective.service.exceptions.InvalidDataException;
@@ -39,5 +40,11 @@ public interface ExpertUserService {
      * @throws DuplicateEmailException if an account with the same email exists already
      */
     ExpertDTO register(ExpertDTO ExpertDTO) throws InvalidDataException, DuplicateEmailException;
-    
+
+    /**
+     * Gets the subjects of expertize of an expert user.
+     * @param expertEmail Email of the expert for which the subjects are retrieved.
+     * @return The retrieved list of discussion subjects.
+     */
+    List<SubjectDTO> getSubjects(String expertEmail);
 }

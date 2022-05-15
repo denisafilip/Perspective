@@ -1,6 +1,7 @@
 package com.example.perspective.controller;
 
 import com.example.perspective.model.DTO.ExpertDTO;
+import com.example.perspective.model.DTO.SubjectDTO;
 import com.example.perspective.model.mappers.ExpertMapper;
 import com.example.perspective.service.account.exceptions.DuplicateEmailException;
 import com.example.perspective.service.account.expert.ExpertUserServiceImpl;
@@ -32,15 +33,15 @@ public class ExpertController {
     @GetMapping("/getAll")
     @PreAuthorize("hasRole('EXPERT')")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public List<ExpertDTO> getAdministrators() {
+    public List<ExpertDTO> getExperts() {
         return expertUserService.findAll();
     }
 
     @GetMapping("/get")
     @PreAuthorize("hasRole('EXPERT')")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ExpertDTO getCurrentAdministrator(@Param("expertEmail") String expertEmail) {
-        logger.info("Obtain logged in administrator data.");
+    public ExpertDTO getCurrentExpert(@Param("expertEmail") String expertEmail) {
+        logger.info("Obtain logged in expert user data.");
         return ExpertMapper.getInstance().convertToDTO(expertUserService.findByEmail(expertEmail));
     }
 
@@ -49,5 +50,13 @@ public class ExpertController {
         logger.info("Save expertDTO to database");
         System.out.println(expertDTO);
         return new ResponseEntity<>(expertUserService.register(expertDTO), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getSubjects")
+    @PreAuthorize("hasRole('EXPERT')")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseEntity<List<SubjectDTO>> getSubjectsOfExpert(@Param("expertEmail") String expertEmail) {
+        logger.info("Obtain logged in expert user data.");
+        return new ResponseEntity<>(expertUserService.getSubjects(expertEmail), HttpStatus.ACCEPTED);
     }
 }

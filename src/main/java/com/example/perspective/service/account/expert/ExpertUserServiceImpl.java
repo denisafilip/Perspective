@@ -5,13 +5,16 @@ import com.example.perspective.model.DTO.SubjectDTO;
 import com.example.perspective.model.Expert;
 import com.example.perspective.model.Subject;
 import com.example.perspective.model.mappers.ExpertMapper;
+import com.example.perspective.model.mappers.SubjectMapper;
 import com.example.perspective.repository.ExpertRepository;
 import com.example.perspective.repository.SubjectRepository;
 import com.example.perspective.service.account.exceptions.DuplicateEmailException;
+import com.example.perspective.service.account.exceptions.NoSuchAccountException;
 import com.example.perspective.service.exceptions.InvalidDataException;
 import com.example.perspective.service.validators.NameValidator;
 import com.example.perspective.service.validators.UserEmailValidator;
 import com.example.perspective.service.validators.UserPasswordValidator;
+import org.omg.DynamicAny._DynEnumStub;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,7 +89,6 @@ public class ExpertUserServiceImpl implements ExpertUserService {
     public ExpertDTO register(ExpertDTO expertDTO) throws InvalidDataException, DuplicateEmailException {
         logger.info("Register expert user {} {}, with email {}, to database", expertDTO.getFirstName(), expertDTO.getLastName(),
                 expertDTO.getEmail());
-        System.out.println(expertDTO);
         validateExpert(expertDTO.getUsername(),
                 expertDTO.getFirstName(),
                 expertDTO.getLastName(),
@@ -100,7 +102,6 @@ public class ExpertUserServiceImpl implements ExpertUserService {
             Optional<Subject> subject = subjectRepository.findByName(subjectDTO.getName());
             subject.ifPresent(subjects::add);
         }
-
 
         if (_expert.isPresent()) {
             logger.error("An expert with the email {} already exists!", expertDTO.getEmail());
@@ -118,5 +119,22 @@ public class ExpertUserServiceImpl implements ExpertUserService {
 
         Expert savedExpert = expertRepository.save(expert);
         return ExpertMapper.getInstance().convertToDTO(savedExpert);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<SubjectDTO> getSubjects(String expertEmail) {
+        Expert _expert = findByEmail(expertEmail);
+
+        if (_expert == null) {
+            logger.error("An expert user with email {} was not found!", expertEmail);
+            throw new NoSuchAccountException("An expert user with email " + expertEmail + " was not found!");
+        }
+        System.out.println(_expert.getSubjects());
+        return _expert.getSubjects().stream()
+                .map(SubjectMapper.getInstance()::convertToDTO)
+                .collect(Collectors.toList());
     }
 }
