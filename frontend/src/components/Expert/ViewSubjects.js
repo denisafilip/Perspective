@@ -1,4 +1,4 @@
-import {Card, Table, Button} from "react-bootstrap";
+import {Table} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
 import "../../css/FormStyle.css";
 import axios from "axios";
@@ -6,7 +6,7 @@ import authHeader from "../AuthHeader";
 import {useNavigate} from "react-router-dom";
 import AuthService from "../AuthService";
 
-export default function ViewTopics() {
+export default function ViewSubjects() {
 
     const [subjects, setSubjects] = useState([]);
 
@@ -23,10 +23,9 @@ export default function ViewTopics() {
             .then((response) => {
                 console.info(response);
                 setSubjects(response.data);
-                //navigate("/expert/viewSubjects");
             })
             .catch((error) => {
-                console.error("There was an error!", error.response.data.message)
+                console.error("There was an error!", error.response.data.message);
             });
     }
 

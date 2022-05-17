@@ -1,5 +1,7 @@
 package com.example.perspective.model.mappers;
 
+import java.io.IOException;
+
 /**
  * Interface used for converting a DTO to its corresponding model class and vice-versa.
  * @param <T> - Model class
@@ -12,7 +14,7 @@ public interface Mapper<T, V> {
      * @param v - DTO object to be converted
      * @return the converted instance of the Model
      */
-    T convertFromDTO(V v);
+    T convertFromDTO(V v) throws IOException;
 
     /**
      * Converts a Model class to a DTO.

@@ -29,4 +29,6 @@ public interface TopicService {
      */
     TopicDTO save(TopicDTO topicDTO) throws InvalidDataException, DuplicateNameException;
 
+    List<TopicDTO> findAllBySubjectName(String subjectName) throws InvalidDataException;
+
 }

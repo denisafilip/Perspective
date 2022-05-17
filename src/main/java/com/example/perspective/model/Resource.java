@@ -28,9 +28,13 @@ public class Resource {
     private String name;
 
     @NonNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "type", nullable = false)
-    private ResourceType type;
+    @Column(name = "mimeType", nullable = false)
+    private String mimeType;
+
+    @NonNull
+    @Lob
+    @Column(name = "data", nullable = false)
+    private byte[] data;
 
     @NonNull
     @ManyToOne(cascade = CascadeType.MERGE)

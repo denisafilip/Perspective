@@ -23,7 +23,7 @@ export default function ExpertHome() {
                 console.log(response.data);
             })
             .catch((error) => {
-                console.error("There was an error when getting the current expert user!", error)
+                console.error("There was an error when getting the current expert user!", error.response.data.message)
                 navigateTo("/");
             } );
     }, []);
@@ -38,7 +38,7 @@ export default function ExpertHome() {
                 <Container>
                     <Navbar.Brand style={{color: "white", fontWeight: "bold"}}  href="/expert/">Expert</Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link style={{color: "white"}} href="/expert/addResource">Add Resource</Nav.Link>{'   '}
+                        <Nav.Link style={{color: "white"}} href="/expert/uploadResource">Upload Resource</Nav.Link>{'   '}
                         <Nav.Link style={{color: "white"}} href="/expert/viewSubjects">View Topics </Nav.Link>{'   '}
                         <Nav.Link style={{color: "white"}} href="/" onClick={logOut}>Log Out</Nav.Link>
                     </Nav>

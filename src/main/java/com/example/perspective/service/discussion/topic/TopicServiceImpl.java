@@ -3,6 +3,7 @@ package com.example.perspective.service.discussion.topic;
 import com.example.perspective.model.DTO.TopicDTO;
 import com.example.perspective.model.Subject;
 import com.example.perspective.model.Topic;
+import com.example.perspective.model.mappers.SubjectMapper;
 import com.example.perspective.model.mappers.TopicMapper;
 import com.example.perspective.repository.TopicRepository;
 import com.example.perspective.service.discussion.SubjectService;
@@ -85,6 +86,20 @@ public class TopicServiceImpl implements TopicService {
         Topic savedTopic = topicRepository.save(t);
 
         return TopicMapper.getInstance().convertToDTO(savedTopic);
+    }
+
+    @Override
+    public List<TopicDTO> findAllBySubjectName(String subjectName) throws InvalidDataException {
+        Subject subject = subjectService.findByName(subjectName);
+
+        if (subject == null) {
+            logger.error("No subject with the name {} was found!", subjectName);
+            throw new InvalidDataException("No subject with the name " + subjectName + " was found!");
+        }
+
+        return topicRepository.findAllBySubject(subject).stream()
+                .map(TopicMapper.getInstance()::convertToDTO)
+                .collect(Collectors.toList());
     }
 
 }

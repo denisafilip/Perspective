@@ -2,9 +2,13 @@ package com.example.perspective.model.mappers;
 
 import com.example.perspective.model.DTO.ResourceDTO;
 import com.example.perspective.model.Resource;
+import org.springframework.util.StringUtils;
+
+import java.io.IOException;
+import java.util.Objects;
 
 /**
- * Singleton class used for mapping an Resource to an ResourceDTO and vice-versa.
+ * Singleton class used for mapping an Resource to a ResourceDTO and vice-versa.
  */
 public class ResourceMapper implements Mapper<Resource, ResourceDTO> {
 
@@ -32,17 +36,25 @@ public class ResourceMapper implements Mapper<Resource, ResourceDTO> {
     }
 
     @Override
-    public Resource convertFromDTO(ResourceDTO resourceDTO) {
-        return null;
+    public Resource convertFromDTO(ResourceDTO resourceDTO) throws IOException {
+        String resourceName = StringUtils.cleanPath(Objects.requireNonNull(resourceDTO.getFile().getOriginalFilename()));
+        return Resource.builder()
+                .name(resourceName)
+                .expert(ExpertMapper.getInstance().convertFromDTO(resourceDTO.getExpertDTO()))
+                .topic(TopicMapper.getInstance().convertFromDTO(resourceDTO.getTopicDTO()))
+                .mimeType(resourceDTO.getFile().getContentType())
+                .data(resourceDTO.getFile().getBytes())
+                .build();
     }
 
     @Override
     public ResourceDTO convertToDTO(Resource resource) {
         return ResourceDTO.builder()
                 .name(resource.getName())
-                .expert(resource.getExpert())
-                .topic(resource.getTopic())
-                .type(resource.getType())
+                .expertDTO(ExpertMapper.getInstance().convertToDTO(resource.getExpert()))
+                .topicDTO(TopicMapper.getInstance().convertToDTO(resource.getTopic()))
+                .mimeType(resource.getMimeType())
+                .data(resource.getData())
                 .build();
     }
 }

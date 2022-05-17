@@ -14,13 +14,13 @@ public class ExpertDTO extends AccountDTO {
     private List<SubjectDTO> subjects;
 
     @Builder(builderMethodName = "ExpertDTOBuilder")
-    public ExpertDTO(@NonNull String username,
-                     @NonNull String firstName,
+    public ExpertDTO(@NonNull String firstName,
                      @NonNull String lastName,
+                     @NonNull String username,
                      @NonNull String email,
                      @NonNull String password,
                      List<SubjectDTO> subjects) {
-        super(username, firstName, lastName, email, password);
+        super(firstName, lastName, username, email, password);
         this.subjects = subjects;
     }
 }

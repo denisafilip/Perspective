@@ -1,9 +1,7 @@
 package com.example.perspective.model.DTO;
 
-import com.example.perspective.model.Expert;
-import com.example.perspective.model.ResourceType;
-import com.example.perspective.model.Topic;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -11,16 +9,20 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 public class ResourceDTO {
-    @NonNull
+
     private String name;
 
-    @NonNull
-    private ResourceType type;
+    private MultipartFile file;
+
+    private String mimeType;
+
+    private byte[] data;
 
     @NonNull
-    private Topic topic;
+    private TopicDTO topicDTO;
 
     @NonNull
-    private Expert expert;
+    private ExpertDTO expertDTO;
 }
