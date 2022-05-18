@@ -68,6 +68,8 @@ public class SecurityConfiguration {
                     .antMatchers("/resource/*").permitAll()
                     .antMatchers("/resource").permitAll()
                     .antMatchers("/getSubjectTopics").permitAll()
+                    .antMatchers("/conversation").permitAll()
+                    .antMatchers("/conversation/**").permitAll()
                     .anyRequest().authenticated();
             http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         }
@@ -100,6 +102,8 @@ public class SecurityConfiguration {
                     .antMatchers("/resource/*").permitAll()
                     .antMatchers("/resource").permitAll()
                     .antMatchers("/getSubjectTopics").permitAll()
+                    .antMatchers("/conversation").permitAll()
+                    .antMatchers("/conversation/**").permitAll()
                     .anyRequest().authenticated();
             http.addFilterBefore(new AuthTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         }
@@ -132,6 +136,8 @@ public class SecurityConfiguration {
                     .antMatchers("/resource/*").permitAll()
                     .antMatchers("/resource").permitAll()
                     .antMatchers("/getSubjectTopics").permitAll()
+                    .antMatchers("/conversation").permitAll()
+                    .antMatchers("/conversation/**").permitAll()
                     .anyRequest().authenticated();
             http.addFilterBefore(new AuthTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         }

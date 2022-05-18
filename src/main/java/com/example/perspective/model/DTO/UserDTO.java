@@ -9,11 +9,11 @@ import lombok.*;
 public class UserDTO extends AccountDTO {
 
     @Builder(builderMethodName = "UserDTOBuilder")
-    public UserDTO(@NonNull String username,
-                   @NonNull String firstName,
+    public UserDTO(@NonNull String firstName,
                    @NonNull String lastName,
+                   @NonNull String username,
                    @NonNull String email,
                    @NonNull String password) {
-        super(username, firstName, lastName, email, password);
+        super(firstName, lastName, username, email, password);
     }
 }

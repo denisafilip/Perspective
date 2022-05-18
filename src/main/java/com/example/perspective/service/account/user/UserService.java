@@ -32,6 +32,13 @@ public interface UserService {
     User findByEmail(String email);
 
     /**
+     * Retrieves a User from the database by their username
+     * @param username of the User
+     * @return the retrieved User instance
+     */
+    User findByUsername(String username);
+
+    /**
      * Registers a User on the food delivery platform
      * @param UserDTO, containing the details of the User to be registered
      * @return the registered User

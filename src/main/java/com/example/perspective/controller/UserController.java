@@ -34,11 +34,26 @@ public class UserController {
         return new ResponseEntity<>(userService.register(userDTO), HttpStatus.CREATED);
     }
 
+    @GetMapping("/getAll")
+    @PreAuthorize("hasRole('USER')")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<UserDTO> getUsers() {
+        return userService.findAll();
+    }
+
     @GetMapping("/get")
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public UserDTO getCurrentCustomer(@Param("userEmail") String userEmail) {
         return UserMapper.getInstance().convertToDTO(userService.findByEmail(userEmail));
+    }
+
+    @GetMapping("/getByUsername")
+    @PreAuthorize("hasRole('USER')")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseEntity<UserDTO> getCurrentUserByUsername(@Param("username") String username) {
+        return new ResponseEntity<>(UserMapper.getInstance().convertToDTO(userService.findByUsername(username)),
+                HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/getPerspectives")

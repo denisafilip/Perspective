@@ -22,6 +22,16 @@ public class User extends Account {
     @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<Perspective> perspectives;
 
+    @JsonIgnore
+    @ToString.Exclude
+    @OneToMany(mappedBy = "receiver", orphanRemoval = true)
+    private List<Conversation> receivedMessages;
+
+    @JsonIgnore
+    @ToString.Exclude
+    @OneToMany(mappedBy = "sender", orphanRemoval = true)
+    private List<Conversation> sentMessages;
+
     /**
      * Constructor used for creating an user instance.
      * @param username of the user

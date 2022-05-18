@@ -47,4 +47,9 @@ public class Topic {
     @ToString.Exclude
     @OneToMany(mappedBy = "topic", orphanRemoval = true)
     private List<Resource> resources;
+
+    @JsonIgnore
+    @ToString.Exclude
+    @OneToMany(mappedBy = "topic", orphanRemoval = true)
+    private List<Conversation> conversations;
 }

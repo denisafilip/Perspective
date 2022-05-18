@@ -86,6 +86,16 @@ public class UserServiceImpl implements UserService {
      * {@inheritDoc}
      */
     @Override
+    public User findByUsername(String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+
+        return user.orElse(null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public UserDTO register(UserDTO userDTO) throws InvalidDataException, DuplicateEmailException {
         logger.info("Register user {} {}, with email {}, to database", userDTO.getFirstName(), userDTO.getLastName(),
                 userDTO.getEmail());
