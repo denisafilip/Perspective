@@ -108,4 +108,18 @@ public class ResourceServiceImpl implements ResourceService {
                 .map(ResourceResponseMapper.getInstance()::convertToDTO)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<ResourceResponseDTO> findAllByTopicName(String topicName) throws InvalidDataException {
+        Topic t = topicService.findByName(topicName);
+
+        if (t == null) {
+            logger.error("Could not find any topic with the name {}!", topicName);
+            throw new InvalidDataException("Could not find any topic with the name " + topicName + "!");
+        }
+
+        return resourceRepository.findAllByTopic(t).stream()
+                .map(ResourceResponseMapper.getInstance()::convertToDTO)
+                .collect(Collectors.toList());
+    }
 }

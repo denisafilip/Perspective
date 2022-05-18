@@ -4,8 +4,9 @@ import spectrum from "../../css/spectrum.png";
 import "../../css/Home.css";
 import axios from "axios";
 import authHeader from "../AuthHeader";
-import AuthService from "../AuthService";
+import UserHome from "./UserHome";
 import {useNavigate} from "react-router-dom";
+import AuthService from "../AuthService";
 
 
 export default function SetPerspective() {

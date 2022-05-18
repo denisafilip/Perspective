@@ -46,4 +46,6 @@ public interface ResourceService {
 
     List<ResourceResponseDTO> findAllByExpertEmail(String expertEmail) throws InvalidDataException;
 
+    List<ResourceResponseDTO> findAllByTopicName(String topicName) throws InvalidDataException;
+
 }

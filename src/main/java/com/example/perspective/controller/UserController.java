@@ -1,14 +1,18 @@
 package com.example.perspective.controller;
 
 import com.example.perspective.model.DTO.PerspectiveDTO;
+import com.example.perspective.model.DTO.ResourceResponseDTO;
 import com.example.perspective.model.DTO.UserDTO;
 import com.example.perspective.model.mappers.UserMapper;
 import com.example.perspective.service.account.exceptions.DuplicateEmailException;
 import com.example.perspective.service.account.user.UserServiceImpl;
 import com.example.perspective.service.discussion.perspective.PerspectiveServiceImpl;
+import com.example.perspective.service.discussion.resource.ResourceServiceImpl;
 import com.example.perspective.service.discussion.topic.TopicServiceImpl;
 import com.example.perspective.service.exceptions.DuplicateNameException;
 import com.example.perspective.service.exceptions.InvalidDataException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -22,11 +26,16 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
+    private final static Logger logger = LoggerFactory.getLogger(UserController.class.getName());
+
     @Autowired
     private UserServiceImpl userService;
 
     @Autowired
     private PerspectiveServiceImpl perspectiveService;
+
+    @Autowired
+    private ResourceServiceImpl resourceService;
 
     @PostMapping("/register")
     public ResponseEntity<UserDTO> registerCustomer(@RequestBody(required = false) UserDTO userDTO)
@@ -74,5 +83,15 @@ public class UserController {
     public ResponseEntity<PerspectiveDTO> modifyPerspective(@RequestBody(required = false) PerspectiveDTO perspectiveDTO)
             throws InvalidDataException, DuplicateNameException {
         return new ResponseEntity<>(perspectiveService.update(perspectiveDTO), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getResourcesByTopic")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<List<ResourceResponseDTO>> getResources(@Param("topicName") String topicName) throws InvalidDataException {
+        logger.info("Get all resources from the database that were added by an expert user for the topic {}.", topicName);
+        return new ResponseEntity<>(
+                resourceService.findAllByTopicName(topicName),
+                HttpStatus.ACCEPTED
+        );
     }
 }
