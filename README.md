@@ -5,3 +5,6 @@ Perspective is an application destined to broaden the horizon of its users, thro
 When talking with somebody with the same opinion, they can delve deeper into the subject and grow their knowledge regarding it. If discussing with somebody with a different opinion, they can listen to valid arguments about it and spark a debate.  
   
 Other ways to overcome the limitations of your mind is through reading books and articles, listening to podcasts and watching videos. These resources are posted by qualified experts, that are a source of valuable information about the given topic.  
+
+![alt text](https://github.com/denisafilip/Perspective/blob/main/perspective_cover.png?raw=true)
+
