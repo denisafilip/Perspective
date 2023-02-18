@@ -31,11 +31,13 @@ public class ConversationController {
     private TopicServiceImpl topicService;
 
     @PostMapping("/sendMessage")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<ConversationDTO> sendMessage(@Validated @RequestBody(required = false) ConversationDTO conversationDTO) throws InvalidDataException {
         return new ResponseEntity<>(conversationService.save(conversationDTO), HttpStatus.CREATED);
     }
 
     @GetMapping("/getAll")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<ConversationDTO>> getMessagesInConversation(@Param("receiverUsername") String receiverUsername,
                                                            @Param("senderUsername") String senderUsername,
                                                            @Param("topicName") String topicName) throws InvalidDataException {
@@ -44,6 +46,7 @@ public class ConversationController {
     }
 
     @GetMapping("/getConversationTopic")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<TopicDTO> getConversationTopic(@Param("topicName") String topicName) throws InvalidDataException {
         return new ResponseEntity<>(TopicMapper.getInstance().convertToDTO(topicService.findByName(topicName)), HttpStatus.ACCEPTED);
     }

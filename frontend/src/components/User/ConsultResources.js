@@ -36,11 +36,6 @@ export default function ConsultResources() {
     } else {
         return (
             <div>
-                <Image
-                    img src={spectrum} alt="cur" className="center"
-                    style={{justifyContent: 'center', width: "800px"}}
-                />
-
                 <div>
                     {subjects?.map(subject => {
                         return (
